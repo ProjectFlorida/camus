@@ -77,7 +77,7 @@ public class EtlInputFormat extends InputFormat<EtlKey, CamusWrapper> {
 
 	/**
 	 * Gets the metadata from Kafka
-	 * 
+	 *
 	 * @param context
 	 * @return
 	 */
@@ -113,7 +113,7 @@ public class EtlInputFormat extends InputFormat<EtlKey, CamusWrapper> {
 		CamusJob.stopTiming("kafkaSetupTime");
 		return topicMetadataList;
 	}
- 
+
 	private SimpleConsumer createConsumer(JobContext context, String broker) {
 		String[] hostPort = broker.split(":");
 		SimpleConsumer consumer = new SimpleConsumer(
@@ -127,7 +127,7 @@ public class EtlInputFormat extends InputFormat<EtlKey, CamusWrapper> {
 
 	/**
 	 * Gets the latest offsets and create the requests as needed
-	 * 
+	 *
 	 * @param context
 	 * @param offsetRequestInfo
 	 * @return
@@ -375,6 +375,7 @@ public class EtlInputFormat extends InputFormat<EtlKey, CamusWrapper> {
 			MessageDecoderFactory.createMessageDecoder(context, topic);
 			return true;
 		} catch (Exception e) {
+			log.error("Failed to create message decoder for topic " + topic, e);
 			return false;
 		}
 	}
